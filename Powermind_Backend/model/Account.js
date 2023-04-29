@@ -24,8 +24,18 @@ class Account {
         }
         return resp.rows[0];
     }
+
+    static async createNewAccount() {
+        let createQuery = `
+            INSERT INTO  account (balance)
+            values (0)
+            RETURNING id
+        `;
+        let resp = await this.execQuery(createQuery);
+        return resp.rows[0].id;
+    }
 }
 
 module.exports = {
-    User,
+    Account,
 }

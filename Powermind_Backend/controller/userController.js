@@ -9,6 +9,16 @@ const UserController = {
             console.log("ERR")
             res.status(400).send(err.message);
         }
+    },
+
+    createUser: async function(req, res) {
+        try {
+            await User.createUser();
+            return res.send("Done");
+        } catch(err) {
+            console.log("ERR")
+            res.status(400).send(err.message);
+        }
     }
 }
 

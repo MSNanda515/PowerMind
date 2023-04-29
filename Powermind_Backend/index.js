@@ -12,3 +12,4 @@ app.listen(port, () => {
 })
 
 app.get('/users/all', UserController.getAllUsers);
+app.get('/users/create', UserController.createUser);

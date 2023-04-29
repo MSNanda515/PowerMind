@@ -1,4 +1,6 @@
 const {pool} = require("../queries");
+const {Account} = require("./Account");
+const {Battery} = require("./Battery");
 
 class User {
     constructor(capacity, threshold) {
@@ -20,6 +22,12 @@ class User {
         let columns = "*"
         let resp = await this.select(columns);
         console.log(resp.rows);
+    }
+
+    static async createUser() {
+        let accountId = await Account.createNewAccount();
+        let batteryId = await Battery.createNewBattery(100);
+        console.log(accountId, batteryId);
     }
 
     // static async create
