@@ -1,4 +1,5 @@
 const express = require('express')
+const {UserController} = require("./controller/userController");
 const app = express()
 const port = 3000
 
@@ -9,3 +10,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+app.get('/users/all', UserController.getAllUsers);
