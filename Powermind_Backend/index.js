@@ -14,3 +14,4 @@ app.listen(port, () => {
 
 app.get('/users/all', UserController.getAllUsers);
 app.post('/users/create', UserController.createUser);
+app.post('/users/login', UserController.loginUser);

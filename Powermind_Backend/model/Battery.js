@@ -4,8 +4,6 @@ const table = "battery";
 
 
 class Battery {
-
-
     constructor(capacity, charge) {
         this.capacity = capacity;
         this.charge = charge;

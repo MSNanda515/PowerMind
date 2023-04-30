@@ -38,6 +38,17 @@ class User {
         return resp.rows[0].id;
     }
 
+    /**
+     * Determines if the user with given userId exists
+     */
+    static async doesUserExist(userId) {
+        let findQuery = `
+            select id from ${table} where id=${userId}
+        `;
+        let resp = await this.execQuery(findQuery);
+        return resp.rows.length > 0;
+    }
+
     // static async create
 }
 

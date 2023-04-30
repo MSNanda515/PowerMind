@@ -26,6 +26,23 @@ const UserController = {
             console.log("ERR")
             res.status(400).send(err.message);
         }
+    },
+
+    loginUser: async function(req, res) {
+        try {
+            let userId = req.body.userId;
+            if (!userId) {
+                throw new Error("Invalid userId: " + userId);
+            }
+            let userExists = await User.doesUserExist(userId);
+            if (!userExists) {
+                throw new Error("User does not exist");
+            }
+            return res.send(`${userId}`);
+        } catch(err) {
+            console.log("ERR")
+            res.status(400).send(err.message);
+        }
     }
 }
 
