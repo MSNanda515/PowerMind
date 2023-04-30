@@ -58,6 +58,10 @@ export class DashComponent {
   }
 
   recurringOperation() {
-    this.iter += 1;
+    this.iter = this.iter + 1;
+    if (this.iter == 24) {
+      // reset counter
+      this.iter = 0;
+    }
   }
 }

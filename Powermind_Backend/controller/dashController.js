@@ -21,6 +21,16 @@ const DashController = {
             console.log("ERR")
             res.status(400).send(err.message);
         }
+    },
+
+    simulateSystem: async function(req, res) {
+        try {
+            let time = req.query?.time || 0;
+            res.send("Done");
+        } catch(err) {
+            console.log("ERR")
+            res.status(400).send(err.message);
+        }
     }
 };
 

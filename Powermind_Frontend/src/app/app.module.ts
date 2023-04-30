@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent } from './login-page/login-page.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatLegacySliderModule} from "@angular/material/legacy-slider";
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import {MatLegacySliderModule} from "@angular/material/legacy-slider";
     AppComponent,
     RegisterPageComponent,
     DashComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    LineChartComponent,
+    BarChartComponent
   ],
     imports: [
         BrowserModule,
