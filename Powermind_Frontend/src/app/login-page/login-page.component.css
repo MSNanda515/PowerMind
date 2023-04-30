@@ -1,0 +1,13 @@
+.authentication-card {
+    width: 30%;
+    margin: 0 auto;
+    padding-bottom: 5px;
+}
+
+.authentication-card-container {
+    min-height: 100vh;
+}
+
+.titleMessage {
+    margin-bottom: 5px;
+}
