@@ -2,6 +2,7 @@ const {pool} = require("../queries");
 const {Account} = require("./Account");
 const {Battery} = require("./Battery");
 
+const table = "users";
 class User {
     constructor(capacity, threshold) {
         this.capacity = capacity;
@@ -9,7 +10,7 @@ class User {
     }
 
     static async select(columns, clause) {
-        let query = `SELECT ${columns} FROM "users"`;
+        let query = `SELECT ${columns} FROM ${table}`;
         if (clause) query += clause;
         return pool.query(query);
     }
@@ -24,10 +25,17 @@ class User {
         console.log(resp.rows);
     }
 
-    static async createUser() {
+    static async createUser(threshold, capacity, dischargeCurrent, dischargeVoltage) {
         let accountId = await Account.createNewAccount();
-        let batteryId = await Battery.createNewBattery(100);
-        console.log(accountId, batteryId);
+        let batteryId = await Battery.createNewBattery(capacity, dischargeCurrent, dischargeVoltage);
+        let sell = threshold < 100;
+        let createQuery = `
+            INSERT INTO  ${table} (account_id, battery_id, threshold, outflow, sell)
+            values (${accountId}, ${batteryId}, ${threshold}, ${0},${sell})
+            RETURNING id
+        `;
+        let resp = await this.execQuery(createQuery);
+        return resp.rows[0].id;
     }
 
     // static async create

@@ -3,7 +3,6 @@ const UserController = {
     getAllUsers: async function(req, res) {
         try {
             await User.getAllUsers();
-
             return res.send("Done");
         } catch(err) {
             console.log("ERR")
@@ -13,8 +12,16 @@ const UserController = {
 
     createUser: async function(req, res) {
         try {
-            await User.createUser();
-            return res.send("Done");
+            let reqBody = req.body;
+            let threshold = reqBody?.threshold || 75;
+            let capacity = reqBody?.capacity || 2.5;
+            let dischargeCurrent = reqBody?.dischargeCurrent || 30;
+            let dischargeVoltage = reqBody?.dischargeVoltage || 12;
+            if (threshold < 0 || threshold > 100) {
+                throw new Error("Invalid Threshold: " + threshold);
+            }
+            let userId = await User.createUser(threshold, capacity, dischargeCurrent, dischargeVoltage);
+            return res.send(`${userId}`);
         } catch(err) {
             console.log("ERR")
             res.status(400).send(err.message);

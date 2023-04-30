@@ -1,6 +1,7 @@
 const express = require('express')
 const {UserController} = require("./controller/userController");
 const app = express()
+app.use(express.json());
 const port = 3000
 
 app.get('/', (req, res) => {
@@ -12,4 +13,4 @@ app.listen(port, () => {
 })
 
 app.get('/users/all', UserController.getAllUsers);
-app.get('/users/create', UserController.createUser);
+app.post('/users/create', UserController.createUser);

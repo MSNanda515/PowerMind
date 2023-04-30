@@ -21,20 +21,10 @@ class Battery {
         return pool.query(query);
     }
 
-    // static async getBalance(accountId) {
-    //     let columns = "*"
-    //     let clause = ` where id=${accountId}`;
-    //     let resp = await this.select(columns);
-    //     if (resp.length == 0) {
-    //         return {};
-    //     }
-    //     return resp.rows[0];
-    // }
-
-    static async createNewBattery(capacity) {
+    static async createNewBattery(capacity, dischargeCurrent, dischargeVoltage) {
         let createQuery = `
-            INSERT INTO  ${table} (capacity, charge)
-            values (${capacity}, ${capacity})
+            INSERT INTO  ${table} (capacity, charge, dischargeCurrent, dischargeVoltage)
+            values (${capacity}, ${capacity}, ${dischargeCurrent}, ${dischargeVoltage})
             RETURNING id
         `;
         let resp = await this.execQuery(createQuery);
