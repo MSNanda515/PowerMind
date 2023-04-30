@@ -1,1 +1,43 @@
-<p>register-page works!</p>
+<div
+        class="authentication-card-container"
+        fxLayout="column"
+        fxLayoutAlign="center"
+>
+    <mat-card class="authentication-card">
+        <mat-card-header>
+            <mat-card-title>Register</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div
+                    [formGroup]="registerForm"
+                    fxLayout="column"
+                    fxLayoutAlign="center stretch"
+            >
+                <mat-form-field>
+                    <mat-label>Threshold</mat-label>
+                    <input matInput type="number" formControlName="threshold" />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Capacity</mat-label>
+                    <input matInput type="number" formControlName="capacity" />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Discharge Current</mat-label>
+                    <input matInput type="number" formControlName="dischargeCurrent" />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Discharge Voltage</mat-label>
+                    <input matInput type="number" formControlName="dischargeVoltage" />
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="onSubmit()">
+                Register
+            </button>
+            <button mat-button routerLink="/login" routerLinkActive="active">
+                Already have an account? Login here.
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
