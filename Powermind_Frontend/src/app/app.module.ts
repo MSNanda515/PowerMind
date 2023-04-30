@@ -14,13 +14,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterPageComponent,
-    DashComponent
+    DashComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

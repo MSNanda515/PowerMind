@@ -13,6 +13,7 @@ const UserController = {
     createUser: async function(req, res) {
         try {
             let reqBody = req.body;
+            console.log(reqBody)
             let threshold = reqBody?.threshold || 75;
             let capacity = reqBody?.capacity || 2.5;
             let dischargeCurrent = reqBody?.dischargeCurrent || 30;
