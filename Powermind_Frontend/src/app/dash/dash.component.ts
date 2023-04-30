@@ -12,14 +12,8 @@ import {DashService} from "../services/dash.service";
 export class DashComponent {
   subscription = new Subscription();
   userData: any = {};
-  public !: FormGroup;
-  batteryThreshold = 1
-  gridsize: number = 30;
 
-  updateThreshold(event: any) {
-    console.log(event)
-    // this.gridsize = event.value;
-  }
+
 
   public userId: string = "";
 
@@ -34,7 +28,21 @@ export class DashComponent {
     this.subscription.add(
         this.dashService.getDashData(this.userId).subscribe(res => {
           this.userData = res.user;
+          this.updateUiForUser();
         })
     )
+  }
+
+  private updateUiForUser() {
+    let thresholdComp : any = document.getElementById("thresholdVal") as HTMLInputElement | null
+    thresholdComp.value = this.userData.threshold;
+  }
+
+  updateThreshold(thresholdVal: any) {
+    this.subscription.add(this.dashService.updateThreshold(this.userId, thresholdVal).subscribe(res => {
+      this.userData = res.user;
+      this.updateUiForUser();
+    }))
+
   }
 }

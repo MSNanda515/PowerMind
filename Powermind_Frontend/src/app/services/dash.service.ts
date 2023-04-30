@@ -13,4 +13,8 @@ export class DashService {
   public getDashData(userId: any): Observable<any> {
     return this.http.get(`${environment.apiUrl}/dash/data?userId=${userId}`);
   }
+
+  public updateThreshold(userId: any, threshold: number): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/dash/threshold?userId=${userId}&threshold=${threshold}`, {});
+  }
 }
