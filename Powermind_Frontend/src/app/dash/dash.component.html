@@ -21,23 +21,27 @@
                 <p class="card-text">
                 <div class="mb-3">
                     <div>
-                        Capacity: {{userData.battery.capacity}} KWHr
+                        Capacity: {{userData.battery?.capacity}} KWHr
                     </div>
                     <div>
                         Current Charge: {{getChargePercentage()}} %
                     </div>
                     <div>
-                        Discharge Current: {{userData.battery.dischargeCurrent}} A
+                        Discharge Current: {{userData.battery?.dischargeCurrent}} A
                     </div>
                     <div>
-                        Discharge Voltage: {{userData.battery.dischargeVoltage}} V
+                        Discharge Voltage: {{userData.battery?.dischargeVoltage}} V
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-<!--    <app-bar-chart></app-bar-chart>-->
-    <app-line-chart></app-line-chart>
-    {{iter}}
+    <app-bar-chart></app-bar-chart>
+<!--    <div class="d-flex">-->
+
+<!--    </div>-->
+<!--    <app-line-chart></app-line-chart>-->
+<!--    <app-line-chart [datasets]="dataset2" [chartId]="id2"></app-line-chart>-->
+<!--    {{iter}}-->
 </div>

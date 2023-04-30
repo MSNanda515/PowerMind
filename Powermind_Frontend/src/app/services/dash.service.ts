@@ -17,4 +17,8 @@ export class DashService {
   public updateThreshold(userId: any, threshold: number): Observable<any> {
     return this.http.post(`${environment.apiUrl}/dash/threshold?userId=${userId}&threshold=${threshold}`, {});
   }
+
+  public getSimulationDataset(time: number): any {
+    return this.http.post(`${environment.apiUrl}/dash/simulate?time=${time}`, {});
+  }
 }

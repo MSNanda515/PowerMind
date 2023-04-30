@@ -23,3 +23,4 @@ app.post('/users/login', UserController.loginUser);
 app.get("/dash/data", DashController.getDashData);
 app.post("/dash/threshold", DashController.saveThreshold);
 app.post("/dash/simulate", DashController.simulateSystem);
+app.post("/dash/simulate/reset", DashController.resetSimulation);

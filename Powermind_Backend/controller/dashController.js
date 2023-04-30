@@ -1,4 +1,5 @@
 const {User} = require("../model/User");
+const {Simulation} = require("../model/Simulation");
 const DashController = {
     getDashData: async function(req, res) {
         try {
@@ -26,6 +27,18 @@ const DashController = {
     simulateSystem: async function(req, res) {
         try {
             let time = req.query?.time || 0;
+            let sim = await Simulation.getSimResult(time);
+            // let
+            res.send(sim);
+        } catch(err) {
+            console.log("ERR")
+            res.status(400).send(err.message);
+        }
+    },
+
+    resetSimulation: async function(req, res) {
+        try {
+            await Simulation.resetSim();
             res.send("Done");
         } catch(err) {
             console.log("ERR")
