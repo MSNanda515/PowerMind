@@ -4,11 +4,12 @@ const {Battery} = require("./Battery");
 
 const table = "users";
 class User {
-    constructor(threshold, battery, account, sell) {
+    constructor(id, threshold, battery, account, sell) {
         this.battery = battery;
         this.threshold = threshold;
         this.account = account;
         this.sell = sell;
+        this.id = id;
     }
 
     static async select(columns, clause) {
@@ -63,7 +64,42 @@ class User {
         let userRec = resp.rows[0];
         let account = await Account.getAccount(userRec.account_id);
         let battery = await Battery.getBattery(userRec.battery_id);
-        return new User(userRec.threshold, battery, account, userRec.sell);
+        return new User(userId, userRec.threshold, battery, account, userRec.sell);
+    }
+
+    static async updateThreshold(userId, threshold) {
+        this.verifyThreshold(threshold);
+        let user = await this.getUser(userId);
+        if (threshold < user.threshold) {
+            await this.updateDataDb([["threshold", threshold]], userId);
+            user.threshold = threshold;
+            return user;
+        }
+        if (Battery.getPercentage(user.battery.charge, user.battery.capacity) >= threshold) {
+            await this.updateDataDb([["threshold", threshold], ["sell", true]], userId);
+            user.threshold = threshold;
+            user.sell = true;
+        } else {
+            await this.updateDataDb([["threshold", threshold], ["sell", false]], userId);
+            user.threshold = threshold;
+            user.sell = false;
+        }
+        return user;
+    }
+
+    static async updateDataDb(values, userId) {
+        let valuesList = values.map((val) => val.join('='));
+        let updateColStr = valuesList.join();
+        let updateQuery = `
+            UPDATE ${table} SET ${updateColStr} where id=${userId}
+        `
+        await this.execQuery(updateQuery);
+    }
+
+    static verifyThreshold(threshold) {
+        if (threshold < 0 || threshold > 100) {
+            throw new Error("Invalid Threshold: " + threshold);
+        }
     }
 }
 

@@ -42,7 +42,14 @@ export class DashComponent {
     this.subscription.add(this.dashService.updateThreshold(this.userId, thresholdVal).subscribe(res => {
       this.userData = res.user;
       this.updateUiForUser();
-    }))
+    }, error => alert(error.error)))
+  }
 
+  logout(): void {
+    this.authenticationService.logout();
+  }
+
+  getChargePercentage(): number {
+    return 100.0 * this.userData.battery.charge / this.userData.battery.capacity;
   }
 }

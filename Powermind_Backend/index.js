@@ -21,3 +21,4 @@ app.post('/users/create', UserController.createUser);
 app.post('/users/login', UserController.loginUser);
 
 app.get("/dash/data", DashController.getDashData);
+app.post("/dash/threshold", DashController.saveThreshold);

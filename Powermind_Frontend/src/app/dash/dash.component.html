@@ -1,14 +1,40 @@
 <div class="container mx-5 my-3">
-    <h3>User Id: {{userId}}</h3>
-    <div class="card mt-2" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Battery Threshold: {{userData.threshold}}</h5>
-            <p class="card-text">
+    <div class="d-flex align-items-center">
+        <h3>User Id: {{userId}}</h3>
+        <a href="#" class="ms-4" (click)="logout()" style="text-decoration: none; color: black">Switch User</a>
+    </div>
+    <div class="d-flex">
+        <div class="card mt-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Battery Threshold: {{userData.threshold}}</h5>
+                <p class="card-text">
                 <div class="mb-3">
                     <input type="number" class="form-control" id="thresholdVal" #thresholdInput/>
                     <div id="thresholdValHelp" class="form-text">Between 1 and 100</div>
                 </div>
-            <button type="button" class="btn btn-primary" (click)="updateThreshold(thresholdInput.value)">Save</button>
+                <button type="button" class="btn btn-primary" (click)="updateThreshold(thresholdInput.value)">Save</button>
+            </div>
+        </div>
+        <div class="card mt-2 ms-5" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Battery Info:</h5>
+                <p class="card-text">
+                <div class="mb-3">
+                    <div>
+                        Capacity: {{userData.battery.capacity}} KWHr
+                    </div>
+                    <div>
+                        Current Charge: {{getChargePercentage()}} %
+                    </div>
+                    <div>
+                        Discharge Current: {{userData.battery.dischargeCurrent}} A
+                    </div>
+                    <div>
+                        Discharge Voltage: {{userData.battery.dischargeVoltage}} V
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>

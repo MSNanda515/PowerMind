@@ -37,7 +37,11 @@ class Battery {
         `;
         let resp = await this.execQuery(query);
         let batteryRec = resp.rows[0];
-        return new Battery(batteryRec.capacity, batteryRec.charge, batteryRec.dischargeCurrent, batteryRec.dischargeVoltage);
+        return new Battery(batteryRec.capacity, batteryRec.charge, batteryRec.dischargecurrent, batteryRec.dischargevoltage);
+    }
+
+    static getPercentage(charge, capacity) {
+        return 100.0 * charge / capacity;
     }
 }
 
