@@ -14,7 +14,7 @@ export class AuthenticationClient {
      */
     public login(userId: string): Observable<string> {
         return this.http.post(
-            environment.apiUrl + '/user/login',
+            environment.apiUrl + '/users/login',
             {
                 userId: userId
             },
