@@ -6,11 +6,11 @@ import {AuthGuard} from "./helpers/auth.guard";
 import {LoginPageComponent} from "./login-page/login-page.component";
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   component: DashComponent,
-  //   canActivate: [AuthGuard],
-  // },
+  {
+    path: '',
+    component: DashComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'register',
     component: RegisterPageComponent,
