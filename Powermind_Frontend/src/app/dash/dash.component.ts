@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../services/authentication.service";
-import {Subscription} from "rxjs";
+import {interval, Observable, Subscription} from "rxjs";
 import {DashService} from "../services/dash.service";
 
 @Component({
@@ -12,12 +12,16 @@ import {DashService} from "../services/dash.service";
 export class DashComponent {
   subscription = new Subscription();
   userData: any = {};
-
+  iter = 0;
 
 
   public userId: string = "";
 
-  constructor(public authenticationService: AuthenticationService, public dashService: DashService) {}
+  constructor(public authenticationService: AuthenticationService, public dashService: DashService) {
+    interval(1000).subscribe(x => {
+      this.recurringOperation();
+    })
+  }
 
   ngOnInit() {
     this.userId = this.authenticationService.getToken() || "0";
@@ -51,5 +55,9 @@ export class DashComponent {
 
   getChargePercentage(): number {
     return 100.0 * this.userData.battery.charge / this.userData.battery.capacity;
+  }
+
+  recurringOperation() {
+    this.iter += 1;
   }
 }
