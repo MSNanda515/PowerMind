@@ -1,5 +1,6 @@
 const {pool} = require("../queries");
 
+const table = "account";
 class Account {
     constructor(balance) {
         this.balance = balance;
@@ -33,6 +34,15 @@ class Account {
         `;
         let resp = await this.execQuery(createQuery);
         return resp.rows[0].id;
+    }
+
+    static async getAccount(accountId) {
+        let query = `
+            Select * from ${table} where id=${accountId};
+        `;
+        let resp = await this.execQuery(query);
+        let accountRec = resp.rows[0];
+        return new Account(accountRec.balance);
     }
 }
 

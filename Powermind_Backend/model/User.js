@@ -4,9 +4,11 @@ const {Battery} = require("./Battery");
 
 const table = "users";
 class User {
-    constructor(capacity, threshold) {
-        this.capacity = capacity;
+    constructor(threshold, battery, account, sell) {
+        this.battery = battery;
         this.threshold = threshold;
+        this.account = account;
+        this.sell = sell;
     }
 
     static async select(columns, clause) {
@@ -50,6 +52,19 @@ class User {
     }
 
     // static async create
+    static async getUser(userId) {
+        let query = `
+            Select * from ${table} where id=${userId};
+        `;
+        let resp = await this.execQuery(query);
+        if (resp.rows.length == 0) {
+            throw new Error(`User ${userId} does not exist`);
+        }
+        let userRec = resp.rows[0];
+        let account = await Account.getAccount(userRec.account_id);
+        let battery = await Battery.getBattery(userRec.battery_id);
+        return new User(userRec.threshold, battery, account, userRec.sell);
+    }
 }
 
 module.exports = {

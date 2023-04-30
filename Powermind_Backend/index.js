@@ -2,6 +2,7 @@ const express = require('express')
 const {UserController} = require("./controller/userController");
 const app = express()
 const cors = require('cors')
+const {DashController} = require("./controller/dashController");
 app.use(express.json());
 app.use(cors())
 
@@ -18,3 +19,5 @@ app.listen(port, () => {
 app.get('/users/all', UserController.getAllUsers);
 app.post('/users/create', UserController.createUser);
 app.post('/users/login', UserController.loginUser);
+
+app.get("/dash/data", DashController.getDashData);

@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent } from './login-page/login-page.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 
 @NgModule({
@@ -24,19 +25,20 @@ import { LoginPageComponent } from './login-page/login-page.component';
     DashComponent,
     LoginPageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatInputModule,
-    HttpClientModule,
-    BrowserAnimationsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatInputModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatToolbarModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

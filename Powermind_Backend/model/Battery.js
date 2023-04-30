@@ -4,9 +4,11 @@ const table = "battery";
 
 
 class Battery {
-    constructor(capacity, charge) {
+    constructor(capacity, charge, dischargeCurrent, dischargeVoltage) {
         this.capacity = capacity;
         this.charge = charge;
+        this.dischargeCurrent = dischargeCurrent;
+        this.dischargeVoltage = dischargeVoltage;
     }
 
     static async select(columns, clause) {
@@ -27,6 +29,15 @@ class Battery {
         `;
         let resp = await this.execQuery(createQuery);
         return resp.rows[0].id;
+    }
+
+    static async getBattery(batteryid){
+        let query = `
+            Select * from ${table} where id=${batteryid};
+        `;
+        let resp = await this.execQuery(query);
+        let batteryRec = resp.rows[0];
+        return new Battery(batteryRec.capacity, batteryRec.charge, batteryRec.dischargeCurrent, batteryRec.dischargeVoltage);
     }
 }
 
