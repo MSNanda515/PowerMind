@@ -11,7 +11,15 @@ import {DashService} from "../services/dash.service";
 })
 export class DashComponent {
   subscription = new Subscription();
-  dashData: any = {};
+  userData: any = {};
+  public !: FormGroup;
+  batteryThreshold = 1
+  gridsize: number = 30;
+
+  updateThreshold(event: any) {
+    console.log(event)
+    // this.gridsize = event.value;
+  }
 
   public userId: string = "";
 
@@ -25,9 +33,8 @@ export class DashComponent {
   public getDashData() {
     this.subscription.add(
         this.dashService.getDashData(this.userId).subscribe(res => {
-          this.dashData = res.data;
+          this.userData = res.user;
         })
-
     )
   }
 }

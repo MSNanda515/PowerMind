@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent } from './login-page/login-page.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatLegacySliderModule} from "@angular/material/legacy-slider";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
         MatInputModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatLegacySliderModule
     ],
   providers: [],
   bootstrap: [AppComponent]
